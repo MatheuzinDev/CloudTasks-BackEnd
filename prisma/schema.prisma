@@ -7,20 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuario {
+model Usuarios {
   id     Int     @id @default(autoincrement())
   nome   String  @db.VarChar(100)
   email  String  @unique @db.VarChar(100)
   senha  String  @db.VarChar(255)
-  tarefas Tarefa[]
+  tarefas Tarefas[]
 }
 
-model Tarefa {
+model Tarefas {
   id         Int     @id @default(autoincrement())
   descricao  String?
   status     Status  @default(pendente)
-  usuario_id Int
-  usuario    Usuario @relation(fields: [usuario_id], references: [id], onDelete: Cascade)
+  usuarios_id Int
+  usuarios    Usuarios @relation(fields: [usuarios_id], references: [id], onDelete: Cascade)
 }
 
 enum Status {
