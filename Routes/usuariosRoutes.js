@@ -1,12 +1,16 @@
 import express from 'express';
-import * as usuariosControllers from "../Controllers/usuariosControllers.js"
-const router = express.Router()
+import * as usuariosControllers from "../Controllers/usuariosControllers.js";
+import { verificarToken } from "../middlewares/authMiddleware.js";
 
-router.get('/', usuariosControllers.getAll)
-router.get('/getone/:id', usuariosControllers.getOne)
-router.delete('/:id', usuariosControllers.deletar)
-router.post('/', usuariosControllers.store)
-router.put('/:id', usuariosControllers.update)
-router.get('/tarefas/:id', usuariosControllers.getAllTarefas)
+const router = express.Router();
 
-export default router
+router.get('/', usuariosControllers.getAll);
+router.get('/getone/:id', usuariosControllers.getOne);
+router.delete('/:id', verificarToken, usuariosControllers.deletar); 
+router.post('/', usuariosControllers.store);
+router.put('/:id', verificarToken, usuariosControllers.update); 
+router.get('/tarefas/:id', verificarToken, usuariosControllers.getAllTarefas); 
+router.post('/register', usuariosControllers.register);
+router.post("/login", usuariosControllers.login);
+
+export default router;

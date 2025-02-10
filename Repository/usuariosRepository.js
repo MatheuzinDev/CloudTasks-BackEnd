@@ -17,9 +17,9 @@ export const deletar = async (id) => {
     })
 }
 
-export const store = async (body) => {
+export const store = async (nome, email, senha) => {
     return await prisma.usuarios.create({
-        data: body
+        data: { nome, email, senha },
     })
 }
 
@@ -35,3 +35,9 @@ export const getAllTarefas = async (usuario_id) => {
         where: { usuarios_id: parseInt(usuario_id) } 
     })
 }
+
+export const getByEmail = async (email) => {
+    return await prisma.usuarios.findUnique({
+        where: { email },
+    });
+};
