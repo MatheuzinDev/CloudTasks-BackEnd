@@ -54,10 +54,11 @@ export const update = async (req, res) => {
 
 export const getAllTarefas = async (req, res) => {
     try {
-        let { id } = req.params
-        const tarefas = await usuariosRepository.getAllTarefas(id)
+        const usuarioId = req.usuarioId
+        const tarefas = await usuariosRepository.getAllTarefas(usuarioId)
         res.status(200).send(tarefas)
     } catch(error) {
+        console.error("Erro ao buscar tarefas:", error)
         res.status(500).send(`O erro foi ${error}`)
     }
 }
@@ -71,13 +72,13 @@ export const register = async (req, res) => {
 
         const senhaCriptografada = await bcrypt.hash(senha, 10);
 
-        await usuariosRepository.store( nome, email, senhaCriptografada )
+        await usuariosRepository.store(nome, email, senhaCriptografada)
 
         res.status(201).send("Usuário cadastrado com sucesso!")
     } catch (error) {
         res.status(500).send(`Erro ao cadastrar usuário: ${error}`)
     }
-};
+}
 
 export const login = async (req, res) => {
     try {

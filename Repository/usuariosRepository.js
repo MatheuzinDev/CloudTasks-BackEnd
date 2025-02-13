@@ -33,11 +33,11 @@ export const update = async (id, body) => {
 export const getAllTarefas = async (usuario_id) => {
     return await prisma.tarefas.findMany({
         where: { usuarios_id: parseInt(usuario_id) } 
-    })
+    });
 }
 
 export const getByEmail = async (email) => {
     return await prisma.usuarios.findUnique({
-        where: { email },
-    });
-};
+        where: { email }
+    })
+}
