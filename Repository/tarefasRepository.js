@@ -19,13 +19,18 @@ export const deletar = async (id) => {
 
 export const store = async (body) => {
     return await prisma.tarefas.create({
-        data: body
+        data: {
+            descricao: body.descricao,
+            usuarios_id: body.usuarios_id
+        }
     })
 }
 
 export const update = async (id, body) => {
     return await prisma.tarefas.updateMany({
         where: { id: parseInt(id) },
-        data: body
+        data: {
+            descricao: body.descricao
+        }
     })
 }

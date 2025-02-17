@@ -54,8 +54,8 @@ export const update = async (req, res) => {
 
 export const getAllTarefas = async (req, res) => {
     try {
-        const usuarioId = req.usuarioId
-        const tarefas = await usuariosRepository.getAllTarefas(usuarioId)
+        const usuario_Id = req.usuarios_id
+        const tarefas = await usuariosRepository.getAllTarefas(usuario_Id)
         res.status(200).send(tarefas)
     } catch(error) {
         console.error("Erro ao buscar tarefas:", error)
@@ -94,7 +94,7 @@ export const login = async (req, res) => {
         const token = jwt.sign(
             { id: usuarioExiste.id }, 
             process.env.JWT_SECRET,
-            { expiresIn: 300 }
+            { expiresIn: 10000 }
         )
 
         res.status(200).json({ auth: true , token})

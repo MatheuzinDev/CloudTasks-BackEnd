@@ -16,7 +16,7 @@ export const verificarToken = (req, res, next) => {
             return res.status(401).json({ auth: false, mensagem: "Token inválido!" })
         }
 
-        req.usuarioId = decoded.id; 
+        req.usuarios_id = decoded.id; 
         next()
     })
 }

@@ -31,8 +31,9 @@ export const deletar = async (req, res) => {
 
 export const store = async (req, res) => {
     try {
-        let body = req.body
-        await tarefasRepository.store(body)
+        const usuarios_id = req.usuarios_id
+        let { descricao } = req.body
+        await tarefasRepository.store({descricao, usuarios_id})
         res.status(200).send(`Tarefa criada com sucesso!`)
     } catch(error) {
         res.status(500).send(`O erro foi ${error}`)
@@ -42,8 +43,9 @@ export const store = async (req, res) => {
 export const update = async (req, res) => {
     try {
         let { id } = req.params
-        let body = req.body
-        await tarefasRepository.update(id, body)
+        let { descricao } = req.body
+        console.log(descricao)
+        await tarefasRepository.update(id, { descricao })
         res.status(200).send(`Tarefa atualizada com sucesso!`)
     } catch(error) {
         res.status(500).send(`O erro foi ${error}`)
