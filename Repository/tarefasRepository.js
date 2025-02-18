@@ -30,7 +30,8 @@ export const update = async (id, body) => {
     return await prisma.tarefas.updateMany({
         where: { id: parseInt(id) },
         data: {
-            descricao: body.descricao
+            descricao: body.descricao,
+            status: body.status
         }
     })
 }

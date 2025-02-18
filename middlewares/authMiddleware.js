@@ -5,7 +5,6 @@ dotenv.config();
 
 export const verificarToken = (req, res, next) => {
     const token = req.headers["autorizar"];
-    console.log("Token recebido no backend:", token)
 
     if (!token) {
         return res.status(403).json({ auth: false, mensagem: "Token não fornecido!" });

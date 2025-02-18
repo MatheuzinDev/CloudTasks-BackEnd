@@ -43,9 +43,8 @@ export const store = async (req, res) => {
 export const update = async (req, res) => {
     try {
         let { id } = req.params
-        let { descricao } = req.body
-        console.log(descricao)
-        await tarefasRepository.update(id, { descricao })
+        let { descricao, status } = req.body
+        await tarefasRepository.update(id, { descricao, status })
         res.status(200).send(`Tarefa atualizada com sucesso!`)
     } catch(error) {
         res.status(500).send(`O erro foi ${error}`)
